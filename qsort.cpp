@@ -22,7 +22,7 @@ void divide(int arr[], int size) {
 }
 
 int conquer(int arr[], int size) {
-    int target = size,
+    int target = 0,
         head = 0,
         tail = size - 1,
         flag = 1;
@@ -31,11 +31,11 @@ int conquer(int arr[], int size) {
         if (flag ^= 1) {
             swap(arr[tail], arr[target]);
             target = tail;
-            while (arr[head] < arr[target] && head < size) head++;
+            while (arr[head] > arr[target] && head < size) head++;
         } else {
             swap(arr[head], arr[target]);
             target = head;
-            while (arr[tail] > arr[target] && tail > 0) tail--;
+            while (arr[tail] < arr[target] && tail > 0) tail--;
         }
     }
 
