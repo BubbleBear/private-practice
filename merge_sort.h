@@ -4,7 +4,7 @@ using namespace std;
 
 namespace MergeSort {
     void merge(int a[], int sizea, int b[], int sizeb) {
-        int* tmp = new int(sizea + sizeb);
+        int *tmp = new int(sizea + sizeb);
         int i = 0, j = 0;
         for (;i < sizea && j < sizeb;) {
             if (a[i] < b[j]) {
