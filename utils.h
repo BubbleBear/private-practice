@@ -25,12 +25,17 @@ namespace Utils {
         }
     }
 
-    float sortCost(void(*fn)(int*, int), int a[], int size) {
+    float sortCost(void(*fn)(int*, int), int a[], int size, int time) {
         clock_t start, end;
         start = clock();
-        (*fn)(a, size);
+        while (time--) (*fn)(a, size);
         end = clock();
-        return (float)(start - end) / CLOCKS_PER_SEC;
+        return (float)(end - start) / CLOCKS_PER_SEC;
+    }
+
+    void logSortCost(string label, void(*fn)(int*, int), int a[], int size, int time) {
+        float cost = sortCost(fn, a, size, time);
+        cout << label << " : " << cost << endl;
     }
 }
 
