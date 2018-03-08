@@ -4,24 +4,20 @@ using namespace std;
 
 namespace QSort {
     int conquer(int arr[], int size) {
-        int target = 0,
-            head = 0,
-            tail = size - 1,
-            flag = 1;
+        int left = 0,
+            right = size - 1,
+            pivot = arr[left];
 
-        while (head < tail) {
-            if (flag ^= 1) {
-                swap(arr[tail], arr[target]);
-                target = tail;
-                while (arr[head] <= arr[target] && head < size) head++;
-            } else {
-                swap(arr[head], arr[target]);
-                target = head;
-                while (arr[tail] >= arr[target] && tail > 0) tail--;
-            }
+        while (left < right) {
+            while (left < right && arr[right] < pivot) right--;
+            arr[left] = arr[right];
+            while (left < right && arr[left] > pivot) left++;
+            arr[right] = arr[left];
         }
 
-        return target;
+        arr[left] = pivot;
+
+        return left;
     }
 
     void divide(int arr[], int size) {
