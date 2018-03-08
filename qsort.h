@@ -3,15 +3,15 @@
 using namespace std;
 
 namespace QSort {
-    int conquer(int arr[], int size) {
+    int partition(int arr[], int size) {
         int left = 0,
-            right = size - 1,
+            right = size,
             pivot = arr[left];
 
         while (left < right) {
-            while (left < right && arr[right] < pivot) right--;
+            while (arr[right--] < pivot && left < right);
             arr[left] = arr[right];
-            while (left < right && arr[left] > pivot) left++;
+            while (arr[left++] > pivot && left < right);
             arr[right] = arr[left];
         }
 
@@ -22,7 +22,7 @@ namespace QSort {
 
     void divide(int arr[], int size) {
         if (size <= 1) return;
-        int offset = conquer(arr, size);
+        int offset = partition(arr, size);
         divide(arr, offset);
         divide(arr + offset + 1, size - offset - 1);
     }
