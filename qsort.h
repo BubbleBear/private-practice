@@ -13,11 +13,11 @@ namespace QSort {
             if (flag ^= 1) {
                 swap(arr[tail], arr[target]);
                 target = tail;
-                while (arr[head] > arr[target] && head < size) head++;
+                while (arr[head] <= arr[target] && head < size) head++;
             } else {
                 swap(arr[head], arr[target]);
                 target = head;
-                while (arr[tail] < arr[target] && tail > 0) tail--;
+                while (arr[tail] >= arr[target] && tail > 0) tail--;
             }
         }
 
@@ -31,7 +31,7 @@ namespace QSort {
         divide(arr + offset + 1, size - offset - 1);
     }
 
-    void qsort(int a[], int size) {
+    void run(int a[], int size) {
         divide(a, size);
     }
 }

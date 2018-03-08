@@ -31,7 +31,7 @@ namespace MergeSort {
         merge(a, sizea, sizeb);
     }
 
-    void mergeSort(int a[], int size) {
+    void run(int a[], int size) {
         divide(a, size);
     }
 }

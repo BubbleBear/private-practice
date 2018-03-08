@@ -28,7 +28,7 @@ namespace HeapSort {
         }
     }
 
-    void heapSort(int a[], int size) {
+    void run(int a[], int size) {
         while (size - 1) {
             heapBuild(a, size);
             swap(a[0], a[size - 1]);
