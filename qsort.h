@@ -4,22 +4,20 @@ using namespace std;
 
 namespace QSort {
     int partition(int arr[], int size) {
-        int left = 1,
+        int left = 0,
             right = size - 1,
             pivot = 0;
 
         while (left < right) {
-            while (arr[right] < arr[pivot] && left < right) right--;
+            while (arr[right] <= arr[pivot] && left < right) right--;
             if (left < right) {
                 swap(arr[right], arr[pivot]);
                 pivot = right;
-                right--;
             }
-            while (arr[left] > arr[pivot] && left < right) left++;
+            while (arr[left] >= arr[pivot] && left < right) left++;
             if (left < right) {
                 swap(arr[left], arr[pivot]);
                 pivot = left;
-                left++;
             }
         }
 
