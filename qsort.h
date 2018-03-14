@@ -3,25 +3,27 @@
 using namespace std;
 
 namespace QSort {
+    void randomize(int arr[], int size) {
+        int rindex = rand() % size;
+        swap(arr[rindex], arr[size - 1]);
+    }
+
     int partition(int arr[], int size) {
+        randomize(arr, size);
         int left = 0,
             right = size - 1,
-            pivot = 0;
+            pivot = right;
 
-        while (left < right) {
-            while (arr[right] <= arr[pivot] && left < right) right--;
-            if (left < right) {
-                swap(arr[right], arr[pivot]);
-                pivot = right;
-            }
-            while (arr[left] >= arr[pivot] && left < right) left++;
-            if (left < right) {
-                swap(arr[left], arr[pivot]);
-                pivot = left;
+        for (int i = 0; i < right; i++) {
+            if (arr[i] <= arr[pivot]) {
+                if (i != left) swap(arr[i], arr[left]);
+                left++;
             }
         }
 
-        return pivot;
+        swap(arr[left], arr[pivot]);
+
+        return left;
     }
 
     void divide(int arr[], int size) {
