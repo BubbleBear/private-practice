@@ -6,7 +6,7 @@ const partitionOffsetEnum = {
 function quicksort(target, lower = 0, upper = target.length, { partition = hoare, getPivot } = {}) {
     if (lower < upper - 1) {
         const partitionIndex = partition(target, lower, upper, { getPivot });
-        quicksort(target, lower, partitionIndex + partitionOffsetEnum[partition.name]);
+        quicksort(target, lower, partitionIndex);
         quicksort(target, partitionIndex + 1, upper);
 
         // console.log(`partitionIndex: ${partitionIndex}`);
@@ -16,7 +16,7 @@ function quicksort(target, lower = 0, upper = target.length, { partition = hoare
 }
 
 // partition
-function lumoto(target, lower, upper, { getPivot = (target, lower, upper) => target[upper - 1] } = {}) {
+function lumoto(target, lower, upper, { getPivot = (target, lower, upper) => target[upper - 1] }) {
     const pivot = getPivot(target, lower, upper);
 
     let partitionIndex = lower;
