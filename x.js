@@ -1,53 +1,55 @@
 /**
- * @param {string} s
- * @return {string[]}
+ * @param {string[]} words
+ * @param {string[]} puzzles
+ * @return {number[]}
  */
-var restoreIpAddresses = function(s) {
-    const result = [];
+var findNumOfValidWords = function(words, puzzles) {
+    const wordSets = words.map((word) => new Set([...word]));
+    const puzzleDescriptors = puzzles.map((puzzle) => ({ first: puzzle[0], set: new Set([...puzzle]) }));
 
-    function recur(assembly = [], segment = 0, i = 0) {
-        if (assembly.length === 4) {
-            if (i === s.length) {
-                result.push(assembly.join('.'));
+    const results = [];
+
+    for (let i = 0; i < puzzleDescriptors.length; ++i) {
+        const { first, set } = puzzleDescriptors[i];
+
+        let count = 0;
+
+        for (let j = 0; j < wordSets.length; ++j) {
+            const wordSet = wordSets[j];
+            const word = [...wordSet];
+
+            if (wordSet.has(first)) {
+                let k = 0;
+
+                while (k < word.length) {
+                    if (!set.has(word[k])) {
+                        break;
+                    }
+
+                    ++k;
+                }
+
+                if (k === word.length) {
+                    ++count;
+                }
             }
-
-            return;
         }
 
-        if (i === s.length) {
-            return;
-        }
-
-        const next = segment * 10 + Number(s[i]);
-
-        if (next > 255) {
-            return;
-        }
-
-        recur([...assembly, next], 0, i + 1);
-
-        if (next === 0) {
-            return;
-        }
-
-        recur([...assembly], next, i + 1);
+        results.push(count);
     }
 
-    recur();
-
-    return result;
+    return results;
 };
 
 const cases = [
-    "25525511135",
-    "0000",
-    "1111",
-    "010010",
-    "101023",
+    [
+        ["aaaa","asas","able","ability","actt","actor","access"],
+        ["aboveyz","abrodyz","abslute","absoryz","actresz","gaswxyz"],
+    ],
 ];
 
 cases.forEach((v, i) => {
-    const r = restoreIpAddresses(v);
+    const r = findNumOfValidWords(...v);
     console.log(r);
     console.log();
 });
